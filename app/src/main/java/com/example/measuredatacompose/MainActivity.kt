@@ -1,14 +1,16 @@
 package com.example.measuredatacompose
 
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.measuredatacompose.presentation.MeasureDataApp
-import kotlinx.coroutines.CoroutineScope
+import com.example.measuredatacompose.presentation.MeasureDataViewModel
+import com.example.measuredatacompose.presentation.MeasureDataViewModelFactory
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,12 +21,21 @@ class MainActivity : ComponentActivity() {
 
         val healthServicesRepository = (application as MainApplication).healthServicesRepository
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val playerId = healthServicesRepository.fetchPlayerId()
-            healthServicesRepository.setPlayerId(playerId)
-        }
-
         setContent {
+            val viewModel: MeasureDataViewModel = viewModel(
+                factory = MeasureDataViewModelFactory(
+                    healthServicesRepository = healthServicesRepository
+                )
+            )
+
+            LaunchedEffect(Unit) {
+                val playerId = withContext(Dispatchers.IO) {
+                    healthServicesRepository.fetchPlayerId()
+                }
+                healthServicesRepository.setPlayerId(playerId)
+                viewModel.setPlayerId(playerId)
+            }
+
             MeasureDataApp(healthServicesRepository = healthServicesRepository)
         }
     }

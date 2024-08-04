@@ -40,6 +40,7 @@ class MeasureDataViewModel(
         mutableStateOf(DataTypeAvailability.UNKNOWN)
 
     val uiState: MutableState<UiState> = mutableStateOf(UiState.Startup)
+    val playerId: MutableState<String> = mutableStateOf("")
 
     init {
         viewModelScope.launch {
@@ -81,6 +82,11 @@ class MeasureDataViewModel(
             availability.value = DataTypeAvailability.UNKNOWN
         }
     }
+
+    fun setPlayerId(id: String) {
+        playerId.value = id
+    }
+
 }
 
 class MeasureDataViewModelFactory(

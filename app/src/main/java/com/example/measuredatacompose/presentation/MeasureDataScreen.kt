@@ -42,13 +42,15 @@ fun MeasureDataScreen(
     availability: DataTypeAvailability,
     enabled: Boolean,
     onButtonClick: () -> Unit,
-    permissionState: PermissionState
+    permissionState: PermissionState,
+    playerId: String
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Text(text = "Player ID: $playerId")
         HrLabel(
             hr = hr,
             availability = availability
@@ -92,7 +94,8 @@ fun MeasureDataScreenPreview() {
             availability = DataTypeAvailability.AVAILABLE,
             enabled = false,
             onButtonClick = {},
-            permissionState = permissionState
+            permissionState = permissionState,
+            playerId = "12345"
         )
     }
 }

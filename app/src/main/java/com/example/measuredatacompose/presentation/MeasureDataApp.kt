@@ -48,6 +48,7 @@ fun MeasureDataApp(
             val hr by viewModel.hr
             val availability by viewModel.availability
             val uiState by viewModel.uiState
+            val playerId by viewModel.playerId
 
             if (uiState == UiState.Supported) {
                 val permissionState = rememberPermissionState(
@@ -61,7 +62,8 @@ fun MeasureDataApp(
                     availability = availability,
                     enabled = enabled,
                     onButtonClick = { viewModel.toggleEnabled() },
-                    permissionState = permissionState
+                    permissionState = permissionState,
+                    playerId = playerId
                 )
             } else if (uiState == UiState.NotSupported) {
                 NotSupportedScreen()
