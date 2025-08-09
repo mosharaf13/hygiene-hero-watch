@@ -18,7 +18,7 @@ package com.example.measuredatacompose
 import android.app.Application
 import com.example.measuredatacompose.data.HealthServicesRepository
 
-const val TAG = "Measure Data Sample"
+const val TAG = "HygieneHero"
 const val PERMISSION = android.Manifest.permission.BODY_SENSORS
 
 class MainApplication : Application() {

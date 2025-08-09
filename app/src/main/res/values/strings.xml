@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="app_name">Measure Data Sample</string>
+    <string name="app_name">HygieneHero</string>
     <string name="not_available">Not available on this device</string>
 
     <string name="start">Start</string>

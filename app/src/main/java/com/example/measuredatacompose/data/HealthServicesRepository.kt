@@ -92,12 +92,12 @@ class HealthServicesRepository(context: Context) {
     }
 
     suspend fun runBlocking(heartbeat: Double, uuid: String) {
-        val string = Fuel.get("https://hygienehero.mosharaf.co/player-stats/submit?heartbeat=${heartbeat}&player_id=${playerId}&variation=1").body
+        val string = Fuel.get("https://hh.mosharaf13.com/player-stats/submit?heartbeat=${heartbeat}&player_id=${playerId}&variation=1").body
         println(string)
     }
 
     suspend fun fetchPlayerId(): String {
-        val playerId = Fuel.get("https://hygienehero.mosharaf.co/player-stats/next-player-id").body
+        val playerId = Fuel.get("https://hh.mosharaf13.com/player-stats/next-player-id").body
         println(playerId)
         return playerId
     }
